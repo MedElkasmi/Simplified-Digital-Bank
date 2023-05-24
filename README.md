@@ -2,6 +2,8 @@
 
 This repository contains the source code for My Project, a web application developed by [Mohamed Elkasmi]. The project uses the W3CRM - Bootstrap Admin Dashboard Template Theme, which is not included in this repository due to its license restrictions.
 
+Simplified Digital Bank, Laravel application for personal finance management. Features user registration, account creation, deposits, withdrawals, transfers, and real-time balance and transaction history.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
