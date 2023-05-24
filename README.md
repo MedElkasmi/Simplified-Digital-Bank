@@ -18,7 +18,7 @@ git clone [Clone](https://github.com/MedElkasmi/TransactionSystem.git)
 
 ### Acknowledgments
 
-Thanks to the creators of the DexignZone Theme, which this project utilizes.
+Thanks to the creators of the W3CRM - Bootstrap Admin Dashboard Template Theme, which this project utilizes.
 
 
 
