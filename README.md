@@ -14,7 +14,7 @@ Before you can run this project, you'll need to obtain a copy of the W3CRM - Boo
 
 1. Clone this repository
 
-git clone https://github.com/yourusername/your-repo.git
+git clone [Clone](https://github.com/MedElkasmi/TransactionSystem.git)
 
 ### Acknowledgments
 
