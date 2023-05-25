@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -57,4 +58,28 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+
+    public function store(Request $request) {
+
+        $user = $request->user();
+    
+        if($request->hasFile('profile_image')) {
+            $file = $request->file('profile_image');
+    
+            $filename = Str::random(12).$file->getClientOriginalName();
+    
+            $path = $file->storeAs('public/profile_images', $filename);
+    
+            $user->profile_image = $filename;
+        }
+    
+        $user->save();
+    
+        return redirect()->route('profile.edit')->with([
+            'message' => 'Admin Profile Image Updated',
+            'alert-type' => 'success'
+        ]);
+    }
+    
 }
