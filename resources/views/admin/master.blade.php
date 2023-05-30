@@ -26,9 +26,13 @@
 	<link href="{{ asset('backend/assets/vendor/jvmap/jquery-jvectormap.css') }}" rel="stylesheet">
 	<link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
 	<link href="{{ asset('backend/assets/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
+
 	
 	<!-- tagify-css -->
 	<link href="{{ asset('backend/assets/vendor/tagify/dist/tagify.css')}}" rel="stylesheet">
+
+    <!-- wizard -->
+    @yield('css')
 	
 	<!-- Style css -->
     <link href="{{ asset('backend/assets/css/style.css')}}" rel="stylesheet">
@@ -154,33 +158,23 @@
 	<!-- Dashboard 1  -->
 	<script src="{{ asset('backend/assets/js/dashboard/dashboard-1.js')}}"></script>
 	<script src="{{ asset('backend/assets/vendor/draggable/draggable.js')}}"></script>
-	
-	
+
 	<!-- tagify -->
 	<script src="{{ asset('backend/assets/vendor/tagify/dist/tagify.js')}}"></script>
-	 
+
+    <!-- Datatable -->
 	<script src="{{ asset('backend/assets/vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
 	<script src="{{ asset('backend/assets/vendor/datatables/js/dataTables.buttons.min.js')}}"></script>
 	<script src="{{ asset('backend/assets/vendor/datatables/js/buttons.html5.min.js')}}"></script>
 	<script src="{{ asset('backend/assets/vendor/datatables/js/jszip.min.js')}}"></script>
 	<script src="{{ asset('backend/assets/js/plugins-init/datatables.init.js')}}"></script>
    
-	<!-- Apex Chart -->
 	
-	<script src="{{ asset('backend/assets/vendor/bootstrap-datetimepicker/js/moment.js')}}"></script>
-	<script src="{{ asset('backend/assets/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
-	
-
 	<!-- Vectormap -->
-    <script src="{{ asset('backend/assets/vendor/jqvmap/js/jquery.vmap.min.js')}}"></script>
-    <script src="{{ asset('backend/assets/vendor/jqvmap/js/jquery.vmap.world.js')}}"></script>
-    <script src="{{ asset('backend/assets/vendor/jqvmap/js/jquery.vmap.usa.js')}}"></script>
     <script src="{{ asset('backend/assets/js/custom.js')}}"></script>
 	<script src="{{ asset('backend/assets/js/deznav-init.js')}}"></script>
-	
-    
-	
-	
+
+    @yield('js')
 	
 </body>
 </html>

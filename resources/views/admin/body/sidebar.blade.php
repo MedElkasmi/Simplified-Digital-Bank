@@ -12,7 +12,7 @@
                 <span class="nav-text">Accounts</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="index.html">Create An Account</a></li>
+                    <li><a href="{{route('account.create')}}">Create An Account</a></li>
                 </ul>
             </li>
         </ul>
