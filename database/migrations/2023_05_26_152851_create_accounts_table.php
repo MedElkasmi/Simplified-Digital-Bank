@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('account_type');
+            $table->string('account_number',12)->unique();
             $table->string('account_name');
             $table->string('currency_type');
             $table->decimal('initial_deposit', 8, 2);

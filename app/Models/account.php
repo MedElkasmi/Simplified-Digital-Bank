@@ -9,8 +9,23 @@ class account extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function user() {
+
         return $this->belongsTo(User::class);
+    }
+
+    public static function generateUniqueAccountNumber() {
+
+        do {
+
+            $account_number = str_pad(rand(0, pow(10, 12)-1), 12, '0', STR_PAD_LEFT);
+        } 
+
+        while (self::where('account_number',$account_number)->exists());
+
+        return $account_number;
     }
     
 }

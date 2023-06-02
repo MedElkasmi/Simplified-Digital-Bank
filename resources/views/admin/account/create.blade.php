@@ -32,6 +32,18 @@
             <div class="card">
                <div class="card-header">
                   <h4 class="card-title">Account Creation</h4>
+                  
+                  @if (session('error'))
+                     <div class="alert alert-danger">
+                     {{ session('error') }}
+                     </div>
+                  @endif
+                  @if (session('success'))
+                     <div class="alert alert-succes">
+                     {{ session('success') }}
+                     </div>
+                  @endif
+
                </div>
                <div class="card-body">
                   <div class="tab-content">
@@ -48,9 +60,10 @@
                               <div class="mb-3">
                                  <label class="form-label">Account Type</label>
                                  <select class="default-select form-control wide" name="account_type">
-                                    <option value="1">Type 1</option>
-                                    <option value="2">Type 2</option>
-                                    <option value="3">Type 3</option>
+                                    <option value="Checking Account">Checking Account</option>
+                                    <option value="Savings Account">Savings Account</option>
+                                    <option value="Student Account">Student Account</option>
+                                    <option value="Joint Account">Joint Account</option>
                                  </select>
                               </div>
                            </div>
@@ -60,7 +73,6 @@
                                  <select class="default-select form-control wide" name="currency_type">
                                     <option value="1">Dollar</option>
                                     <option value="2">Euro</option>
-                                    <option value="3">Dollar Canada</option>
                                  </select>
                               </div>
                            </div>
@@ -76,9 +88,9 @@
                               <div class="mb-3">
                                  <label class="form-label">Security Question</label>
                                  <select class="default-select form-control wide" name="question">
-                                    <option value="1">Question 1?</option>
-                                    <option value="2">Question 2?</option>
-                                    <option value="3">Question 3?</option>
+                                    <option value="What is your favorite animal?">What is your favorite animal?</option>
+                                    <option value="Where you were born?">Where you were born?</option>
+                                    <option value="What is the name of your hight School?">What is the name of your hight School?</option>
                                  </select>
                               </div>
                            </div>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\userTaxInformation;
+use App\Models\UserTaxInformation;
 use Illuminate\Http\Request;
 
 class UserTaxInformationController extends Controller
@@ -34,7 +34,7 @@ class UserTaxInformationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(userTaxInformation $userTaxInformation)
+    public function show(UserTaxInformation $userTaxInformation)
     {
         //
     }
@@ -42,7 +42,7 @@ class UserTaxInformationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(userTaxInformation $userTaxInformation)
+    public function edit(UserTaxInformation $userTaxInformation)
     {
         //
     }
@@ -50,7 +50,7 @@ class UserTaxInformationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, userTaxInformation $userTaxInformation)
+    public function update(Request $request, UserTaxInformation $userTaxInformation)
     {
         //
     }
@@ -58,7 +58,7 @@ class UserTaxInformationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(userTaxInformation $userTaxInformation)
+    public function destroy(UserTaxInformation $userTaxInformation)
     {
         //
     }

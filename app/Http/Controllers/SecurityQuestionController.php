@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\securityQuestion;
+use App\Models\SecurityQuestion;
 use Illuminate\Http\Request;
 
 class SecurityQuestionController extends Controller
@@ -34,7 +34,7 @@ class SecurityQuestionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(securityQuestion $securityQuestion)
+    public function show(SecurityQuestion $securityQuestion)
     {
         //
     }
@@ -42,7 +42,7 @@ class SecurityQuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(securityQuestion $securityQuestion)
+    public function edit(SecurityQuestion $securityQuestion)
     {
         //
     }
@@ -50,7 +50,7 @@ class SecurityQuestionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, securityQuestion $securityQuestion)
+    public function update(Request $request, SecurityQuestion $securityQuestion)
     {
         //
     }
@@ -58,7 +58,7 @@ class SecurityQuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(securityQuestion $securityQuestion)
+    public function destroy(SecurityQuestion $securityQuestion)
     {
         //
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\transactionType;
+use App\Models\TransactionType;
 use Illuminate\Http\Request;
 
 class TransactionTypeController extends Controller
@@ -34,7 +34,7 @@ class TransactionTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(transactionType $transactionType)
+    public function show(TransactionType $transactionType)
     {
         //
     }
@@ -42,7 +42,7 @@ class TransactionTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(transactionType $transactionType)
+    public function edit(TransactionType $transactionType)
     {
         //
     }
@@ -50,7 +50,7 @@ class TransactionTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, transactionType $transactionType)
+    public function update(Request $request, TransactionType $transactionType)
     {
         //
     }
@@ -58,7 +58,7 @@ class TransactionTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(transactionType $transactionType)
+    public function destroy(TransactionType $transactionType)
     {
         //
     }

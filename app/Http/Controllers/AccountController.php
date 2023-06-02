@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\account;
-use App\Models\securityQuestion;
-use App\Models\userSecurityAnswer;
+use App\Models\Account;
+use App\Models\SecurityQuestion;
+use App\Models\UserSecurityAnswer;
+use App\Models\UserTaxInformation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+
 
 
 class AccountController extends Controller
@@ -35,10 +37,7 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $validatedData = $request->validate([
-
-
+        $request->validate([
             'account_name' => 'required',
             'account_type' => 'required',
             'currency_type' => 'required',
@@ -48,52 +47,51 @@ class AccountController extends Controller
             'tax_id' => 'required',
         ]);
 
-        // Begin transaction
         DB::beginTransaction();
 
         try {
-            
             $user = Auth::user(); 
 
-            $account = new account;
-            $account->user_id = $user->id;
-            $account->account_name = $validatedData['account_name'];
-            $account->account_type = $validatedData['account_type'];
-            $account->currency_type = $validatedData['currency_type'];
-            $account->initial_deposit = $validatedData['initial_deposit'];
-            $account->save();
+            $account = Account::create([
+                'user_id' => $user->id,
+                'account_name' => $request->account_name,
+                'account_number' => Account::generateUniqueAccountNumber(),
+                'account_type' => $request->account_type,
+                'currency_type' => $request->currency_type,
+                'initial_deposit' => $request->initial_deposit,
+            ]);
 
-            $securityQuestion = new securityQuestion;
-            $securityQuestion->question = $validatedData['question'];
-            $securityQuestion->save(); 
+            $securityQuestion = SecurityQuestion::create([
+                'question' => $request->question,
+            ]);
 
-            $userSecurityAnswer = new userSecurityAnswer;
-            $userSecurityAnswer = $validatedData['answer'];
-            $userSecurityAnswer->save();
+            $userSecurityAnswer = UserSecurityAnswer::create([
+                'user_id' => $user->id, 
+                'security_question_id' => $securityQuestion->id, 
+                'answer' => $request->answer,
+            ]);
 
-            $userTaxInformation = new userTaxInformation;
-            $userTaxInformation = $validatedData['tax_id'];
-            $userTaxInformation->save();
+            $userTaxInformation = UserTaxInformation::create([
+                'user_id' => $user->id,
+                'tax_id' => $request->tax_id,
+            ]);
 
-            // If everything is fine, commit the transaction
             DB::commit();
-        }
 
-        catch(\Exception $e) {
+            return redirect()->back()->with('success', 'Account created successfully');
 
-            // An error occured; cancel the transaction...
+        } catch (\Exception $e) {
             DB::rollback();
-            // and throw the error again.
-            throw $e;
+            return redirect()->back()->with('error', 'An error occurred, please try again');
         }
-
-
     }
+
+
 
     /**
      * Display the specified resource.
      */
-    public function show(account $account)
+    public function show(Account $account)
     {
         //
     }
@@ -101,7 +99,7 @@ class AccountController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(account $account)
+    public function edit(Account $account)
     {
         //
     }
@@ -109,7 +107,7 @@ class AccountController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, account $account)
+    public function update(Request $request, Account $account)
     {
         //
     }
@@ -117,7 +115,7 @@ class AccountController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(account $account)
+    public function destroy(Account $account)
     {
         //
     }

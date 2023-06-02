@@ -9,6 +9,8 @@ class securityQuestion extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function securityAnswers() {
         return $this->hasMany(UserSecurityAnswer::class);
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\userSecurityAnswer;
+use App\Models\UserSecurityAnswer;
 use Illuminate\Http\Request;
 
 class UserSecurityAnswerController extends Controller
@@ -34,7 +34,7 @@ class UserSecurityAnswerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(userSecurityAnswer $userSecurityAnswer)
+    public function show(UserSecurityAnswer $userSecurityAnswer)
     {
         //
     }
@@ -42,7 +42,7 @@ class UserSecurityAnswerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(userSecurityAnswer $userSecurityAnswer)
+    public function edit(UserSecurityAnswer $userSecurityAnswer)
     {
         //
     }
@@ -50,7 +50,7 @@ class UserSecurityAnswerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, userSecurityAnswer $userSecurityAnswer)
+    public function update(Request $request, UserSecurityAnswer $userSecurityAnswer)
     {
         //
     }
@@ -58,7 +58,7 @@ class UserSecurityAnswerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(userSecurityAnswer $userSecurityAnswer)
+    public function destroy(UserSecurityAnswer $userSecurityAnswer)
     {
         //
     }
