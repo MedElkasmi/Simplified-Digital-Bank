@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\AccountType;
 use App\Models\SecurityQuestion;
 use App\Models\UserSecurityAnswer;
 use App\Models\UserTaxInformation;
@@ -37,7 +38,7 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'account_name' => 'required',
             'account_type' => 'required',
             'currency_type' => 'required',
@@ -47,16 +48,24 @@ class AccountController extends Controller
             'tax_id' => 'required',
         ]);
 
+        $user = Auth::user(); 
+
+        $accountType = AccountType::where('type_name', $validated['account_type'])->first();
+
+        // if($accountType === null || $user->accounts()->where('account_type_id',$accountType->id)->exists()) {
+
+        //     return redirect()->back()->withErrors(['account_type' => 'You already have an account of this type.']);
+        // }
+
         DB::beginTransaction();
 
         try {
-            $user = Auth::user(); 
-
+            
             $account = Account::create([
                 'user_id' => $user->id,
                 'account_name' => $request->account_name,
+                'account_type_id' => $accountType->id,
                 'account_number' => Account::generateUniqueAccountNumber(),
-                'account_type' => $request->account_type,
                 'currency_type' => $request->currency_type,
                 'initial_deposit' => $request->initial_deposit,
             ]);
@@ -82,7 +91,7 @@ class AccountController extends Controller
 
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->with('error', 'An error occurred, please try again');
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
 

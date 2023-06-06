@@ -16,6 +16,12 @@ class account extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function accountType() {
+        
+        return $this->belongsTo(AccountType::class);
+    }
+
+
     public static function generateUniqueAccountNumber() {
 
         do {
