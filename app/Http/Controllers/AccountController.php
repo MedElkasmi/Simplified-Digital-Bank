@@ -10,6 +10,7 @@ use App\Models\UserTaxInformation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 
@@ -18,9 +19,15 @@ class AccountController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $data = [
+            'user' => $request->user(),
+            'accounts' => Account::all(),
+        ];
+
+        return view("admin.account.index",$data);
     }
 
     /**
@@ -39,7 +46,6 @@ class AccountController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'account_name' => 'required',
             'account_type' => 'required',
             'currency_type' => 'required',
             'initial_deposit' => 'required',
@@ -52,10 +58,10 @@ class AccountController extends Controller
 
         $accountType = AccountType::where('type_name', $validated['account_type'])->first();
 
-        // if($accountType === null || $user->accounts()->where('account_type_id',$accountType->id)->exists()) {
+        if($user->accounts()->where('account_type_id',$accountType->id)->exists()) {
 
-        //     return redirect()->back()->withErrors(['account_type' => 'You already have an account of this type.']);
-        // }
+            return redirect()->back()->withErrors(['account_type' => 'You already have an account of this type.']);
+        }
 
         DB::beginTransaction();
 
@@ -63,11 +69,13 @@ class AccountController extends Controller
             
             $account = Account::create([
                 'user_id' => $user->id,
-                'account_name' => $request->account_name,
+                'account_name' => $user->name,
                 'account_type_id' => $accountType->id,
                 'account_number' => Account::generateUniqueAccountNumber(),
                 'currency_type' => $request->currency_type,
                 'initial_deposit' => $request->initial_deposit,
+                'balance' => 0,
+                'withdrawal_limit' => 0,
             ]);
 
             $securityQuestion = SecurityQuestion::create([
@@ -77,7 +85,7 @@ class AccountController extends Controller
             $userSecurityAnswer = UserSecurityAnswer::create([
                 'user_id' => $user->id, 
                 'security_question_id' => $securityQuestion->id, 
-                'answer' => $request->answer,
+                'answer' => Hash::make($request->answer),
             ]);
 
             $userTaxInformation = UserTaxInformation::create([

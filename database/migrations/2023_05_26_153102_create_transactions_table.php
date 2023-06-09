@@ -14,14 +14,17 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
 
             $table->id(); 
-            $table->unsignedBigInteger('account_id'); 
+            $table->unsignedBigInteger('from_account_id'); 
+            $table->unsignedBigInteger('to_account_id'); 
             $table->unsignedBigInteger('transaction_type_id'); 
-            $table->decimal('amount', 8, 2); 
+            $table->decimal('amount', 8, 2);
+            $table->string('transaction_number',36)->unique();
             $table->timestamps(); 
             
             // Setting up the foreign key constraints
-            $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
-            $table->foreign('transaction_type_id')->references('id')->on('transaction_types')->onDelete('cascade');
+            $table->foreign('from_account_id')->references('id')->on('accounts');
+            $table->foreign('to_account_id')->references('id')->on('accounts');
+            $table->foreign('transaction_type_id')->references('id')->on('transaction_types');
         });
     }
 

@@ -18,9 +18,12 @@ class TransactionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $user = $request->user();
+
+        return view('admin.transaction.create',['user' => $user]);
     }
 
     /**

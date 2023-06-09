@@ -30,8 +30,10 @@ class CreateAccountTest extends TestCase
 
         // Create account data
         $attributes = [
+            'user_id' => $user->id,
             'account_name' => 'My Account',
-            'account_type' => $accountType->id,
+            'account_type' => $accountType->type_name,
+            'account_number' => '012345678999',
             'currency_type' => 'USD',
             'initial_deposit' => 1000,
             'question' => 'Security Question?',
@@ -41,13 +43,15 @@ class CreateAccountTest extends TestCase
 
         // Act
         // Submit the POST request to create an account
-        $response = $this->post('/accounts', $attributes);
+        $response = $this->post('/account', $attributes);
 
         // Assert
         // Check that the account was created in the database
         $this->assertDatabaseHas('accounts', ['account_name' => 'My Account']);
 
+
         // Check the response
-        $response->assertRedirect('/accounts');
+        $response->assertSessionHas('success', 'Account created successfully');
+
     }
 }

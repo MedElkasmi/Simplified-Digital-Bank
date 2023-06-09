@@ -17,7 +17,8 @@ class AccountTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'type_name' => $this->faker->randomElement(['Savings Account', 'Checking Account', 'Loan Account'])
+            'type_name' => $this->faker->randomElement([
+                'Savings Account', 'Checking Account', 'Student Account'])
         ];
     }
 }

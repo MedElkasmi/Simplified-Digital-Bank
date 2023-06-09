@@ -45,7 +45,7 @@
                                  @csrf
 
                                  <div class="mb-3">
-                                    <label class="mb-1"><strong>Name</strong></label>
+                                    <label class="mb-1"><strong>Full Name</strong></label>
                                     <input type="text" name="name" class="form-control">
                                  </div>
                                  <div class="mb-3">

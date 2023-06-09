@@ -52,12 +52,6 @@
                         <div class="row">
                            <div class="col-lg-6 mb-2">
                               <div class="mb-3">
-                                 <label class="text-label form-label">Account Name*</label>
-                                 <input type="text" name="account_name" class="form-control" required>
-                              </div>
-                           </div>
-                           <div class="col-lg-6 mb-2">
-                              <div class="mb-3">
                                  <label class="form-label">Account Type</label>
                                  <select class="default-select form-control wide" name="account_type">
                                     <option value="Checking Account">Checking Account</option>
@@ -71,8 +65,8 @@
                               <div class="mb-3">
                                  <label class="form-label">Currency :</label>
                                  <select class="default-select form-control wide" name="currency_type">
-                                    <option value="1">Dollar</option>
-                                    <option value="2">Euro</option>
+                                    <option value="USD">USD</option>
+                                    <option value="Euro">Euro</option>
                                  </select>
                               </div>
                            </div>
