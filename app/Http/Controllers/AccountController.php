@@ -74,7 +74,7 @@ class AccountController extends Controller
                 'account_number' => Account::generateUniqueAccountNumber(),
                 'currency_type' => $request->currency_type,
                 'initial_deposit' => $request->initial_deposit,
-                'balance' => 0,
+                'balance' => $request->initial_deposit,
                 'withdrawal_limit' => 0,
             ]);
 

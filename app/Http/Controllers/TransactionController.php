@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\Account;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class TransactionController extends Controller
 {
@@ -13,6 +16,7 @@ class TransactionController extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -21,9 +25,12 @@ class TransactionController extends Controller
     public function create(Request $request)
     {
         //
-        $user = $request->user();
+        $data = [
+            'user' => $request->user(),
+            'transactions' => Transaction::all(),
+        ];
 
-        return view('admin.transaction.create',['user' => $user]);
+        return view("admin.transaction.create",$data);
     }
 
     /**
@@ -31,7 +38,47 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the incoming request
+        $validated = $request->validate([
+            'from_account' => 'required',
+            'to_account' => 'required',
+            'amount' => 'required|numeric|min:0',
+        ]);
+
+        // Retrieve the 'from' and 'to' accounts from the database
+        $fromAccount = Account::where('account_number', $validated['from_account'])->first();
+        $toAccount = Account::where('account_number', $validated['to_account'])->first();
+
+        // Check if accounts are valid
+        if (!$fromAccount || !$toAccount) {
+            return redirect()->back()->with('error', 'Account not found.');
+        }
+
+        // Check if the 'from' account has sufficient balance for the transaction
+        if ($fromAccount->balance < $validated['amount']) {
+            return redirect()->back()->with('error', 'Insufficient balance for this transaction.');
+        }
+
+        // Create a new database transaction
+        DB::transaction(function () use ($fromAccount, $toAccount, $validated) {
+
+            // Deduct the amount from the 'from' account and add it to the 'to' account
+            $fromAccount->decrement('balance', $validated['amount']);
+            $toAccount->increment('balance', $validated['amount']);
+
+            // Create a new transaction record
+            $transaction = Transaction::create([
+                'from_account_id' => $fromAccount->id,
+                'to_account_id' => $toAccount->id,
+                'amount' => $validated['amount'],
+                'transaction_type_id' => 1, 
+                'transaction_number' => Str::uuid(),
+            ]);
+        });
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Transaction successful.');
+
     }
 
     /**

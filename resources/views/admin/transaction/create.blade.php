@@ -20,47 +20,53 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-3 col-xxl-4">
+            <div class="col-xl-3 col-xxl-3">
                 <div class="card h-auto">
                     <div class="card-header">
-                        <h4 class="heading mb-0">Add New Account </h4>
+                        <h4 class="heading mb-0">Send Money </h4>
                     </div>
                     <div class="card-body">
-                        <form class="finance-hr">
-                            <div class="form-group mb-3">
-                                <label class="text-secondary font-w500"> Account Title<span class="text-danger">*</span>
-                              </label>
-                              <input type="text" class="form-control"  placeholder="Account Title">
+
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                            {{ session('error') }}
                             </div>
+                        @endif
+                        @if (session('success'))
+                            <div class="alert alert-succes">
+                            {{ session('success') }}
+                            </div>
+                        @endif
+
+                        <form method="POST" action="{{route('transaction.store')}}" class="finance-hr">
+                            @csrf
+                            <div class="form-group mb-3">
+                                <label class="text-secondary font-w500"> Sender<span class="text-danger">*</span>
+                              </label>
+                              <input type="text" class="form-control" name="from_account">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="text-secondary"> Beneficiary<span class="text-danger">*</span>
+                              </label>
+                              <input type="text" class="form-control" name="to_account">
+                            </div>
+
                             <div class="form-group mb-3">
                               <label> Amount<span class="text-danger">*</span>
                               </label>
                               <div class="input-group">
                                 <div class="input-group-text">$</div>
-                                <input type="text" class="form-control" placeholder="Initial Balance">
+                                <input type="text" class="form-control" placeholder="Initial Balance" name="amount">
                               </div>
                             </div>
-                            <div class="form-group mb-3">
-                                <label class="text-secondary"> Account No<span class="text-danger">*</span>
-                              </label>
-                              <input type="text" class="form-control"  placeholder="Account Title">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="text-secondary">Branch Code<span class="text-danger">*</span>
-                              </label>
-                              <input type="text" class="form-control"  placeholder="Branch Code">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="text-secondary">Branch Name<span class="text-danger">*</span>
-                              </label>
-                              <input type="text" class="form-control"  placeholder="Branch Name">
-                            </div>
+
                             <button type="submit" class="btn btn-primary mb-3">Confirm</button>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-9 col-xxl-8">
+            <div class="col-xl-9 col-xxl-9">
                 <div class="card">
                     <div class="card-body p-0">
                         <div class="table-responsive active-projects manage-client">
@@ -70,254 +76,37 @@
                             <table id="empoloyees-tbl1" class="table">
                                 <thead>
                                     <tr>
-                                        <th>Account Title</th>
+                                        <th>Sender</th>
+                                        <th>Beneficiary</th>
                                         <th>Amount</th>
-                                        <th>Account No</th>
-                                        <th>Branch Code</th>
-                                        <th>Branch Name</th>
+                                        <th>Currency</th>
+                                        <th>Transaction Log</th>
+                                        <th>Transaction Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($transactions as $transaction)
                                     <tr>
                                         <td>
-                                            <a href="javascript:void(0)" class="text-primary">Saving</a>
-                                        </td>
-                                        <td><span>500 $</span></td>
-                                        <td>
-                                            <span>1234500000000</span>
+                                            <span>{{ $transaction->fromAccount->account_name }}</span>
                                         </td>
                                         <td>
-                                            <span>1234</span>
+                                            <span>{{ $transaction->toAccount->account_name }}</span>
                                         </td>
                                         <td>
-                                            <span>Bank Of Uk</span>
+                                            <span>{{ $transaction->amount }}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ $transaction->fromAccount->currency_type }}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ $transaction->transaction_number }}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ $transaction->created_at }}</span>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Salary </a>
-                                        </td>
-                                        <td><span>700 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of Lundon</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Fixed deposit</a>
-                                        </td>
-                                        <td><span>700 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of Lundon</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Recurring deposit</a>
-                                        </td>
-                                        <td><span>6000 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of India</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Saving</a>
-                                        </td>
-                                        <td><span>500 $</span></td>
-                                        <td>
-                                            <span>1234500000000</span>
-                                        </td>
-                                        <td>
-                                            <span>1234</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of Uk</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Salary </a>
-                                        </td>
-                                        <td><span>700 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of Lundon</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Fixed deposit</a>
-                                        </td>
-                                        <td><span>700 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of Lundon</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Fixed deposit</a>
-                                        </td>
-                                        <td><span>700 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of Lundon</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Salary </a>
-                                        </td>
-                                        <td><span>700 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of Lundon</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Fixed deposit</a>
-                                        </td>
-                                        <td><span>700 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of Lundon</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Fixed deposit</a>
-                                        </td>
-                                        <td><span>700 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of Lundon</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Recurring deposit</a>
-                                        </td>
-                                        <td><span>6000 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of India</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Recurring deposit</a>
-                                        </td>
-                                        <td><span>6000 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of India</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Fixed deposit</a>
-                                        </td>
-                                        <td><span>700 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of Lundon</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Salary </a>
-                                        </td>
-                                        <td><span>700 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of Lundon</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0)" class="text-primary">Fixed deposit</a>
-                                        </td>
-                                        <td><span>700 $</span></td>
-                                        <td>
-                                            <span>678900000000</span>
-                                        </td>
-                                        <td>
-                                            <span>5678</span>
-                                        </td>
-                                        <td>
-                                            <span>Bank Of Lundon</span>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                                 
                             </table>
