@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Interest;
 use App\Models\AccountType;
 use App\Models\SecurityQuestion;
 use App\Models\UserSecurityAnswer;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 
 
@@ -76,6 +78,15 @@ class AccountController extends Controller
                 'initial_deposit' => $request->initial_deposit,
                 'balance' => $request->initial_deposit,
                 'withdrawal_limit' => 0,
+            ]);
+
+            $interest = Interest::create([
+                'account_id' => $account->id,
+                'interest_rate' => 1.5,
+                'interest_period' => 'yearly',
+                'calculation_date' => Carbon::now(),
+                'interest_amount' => $account->balance,
+                
             ]);
 
             $securityQuestion = SecurityQuestion::create([

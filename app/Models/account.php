@@ -11,25 +11,41 @@ class account extends Model
 
     protected $guarded = [];
 
+    
+
     public function user() {
 
         return $this->belongsTo(User::class);
     }
+
+
 
     public function accountType() {
         
         return $this->belongsTo(AccountType::class);
     }
 
+
+
     public function outgoingTransactions() {
 
         return $this->hasMany(Transaction::class, 'from_account_id');
     }
 
+
+
     public function incomingTransactions() {
         
         return $this->hasMany(Transaction::class, 'to_account_id');
     }
+
+
+
+    public function interest() {
+        
+        return $this->hasOne(Interest::class);
+    }
+
 
 
     public static function generateUniqueAccountNumber() {
