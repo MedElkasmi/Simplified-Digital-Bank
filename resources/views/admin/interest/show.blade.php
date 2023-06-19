@@ -35,36 +35,31 @@
                                         <th>Interet Period</th>
                                         <th>Calculation Date</th>
                                         <th>Interet Amount</th>
-                                        <th>Balance</th>
-                                        <th>Date</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($interests as $interest)
+
                                     <tr>
                                         <td>
-                                            <span>{{ $interest->account->account_name }}</span>
+                                            <span></span>
                                         </td>
                                         <td>
-                                            <span>{{ $interest->interest_rate }}</span>
+                                            <span></span>
                                         </td>
                                         <td>
-                                            <span>{{ $interest->interest_period }}</span>
+                                            <span></span>
                                         </td>
                                         <td>
-                                            <span>{{ $interest->calculation_date }}</span>
+                                            <span></span>
                                         </td>
                                         <td>
-                                            <span>{{ $interest->interest_amount }}</span>
+                                            <span></span>
                                         </td>
                                         <td>
-                                            <span>{{ $interest->account->balance }}</span>
-                                        </td>
-                                        <td>
-                                            <span>{{ $interest->created_at }}</span>
+                                            <span></span>
                                         </td>
                                     </tr>
-                                    @endforeach
                                 </tbody>
                                 
                             </table>

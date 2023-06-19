@@ -41,9 +41,9 @@ class account extends Model
 
 
 
-    public function interest() {
+    public function interests() {
         
-        return $this->hasOne(Interest::class);
+        return $this->hasMany(Interest::class);
     }
 
 

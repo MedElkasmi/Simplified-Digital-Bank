@@ -83,9 +83,9 @@ class AccountController extends Controller
             $interest = Interest::create([
                 'account_id' => $account->id,
                 'interest_rate' => 1.5,
-                'interest_period' => 'yearly',
+                'interest_period' => 'Daily',
                 'calculation_date' => Carbon::now(),
-                'interest_amount' => $account->balance,
+                'interest_amount' => 0,
                 
             ]);
 

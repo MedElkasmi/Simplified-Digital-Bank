@@ -24,18 +24,24 @@ class InterestController extends Controller
     {
         //
         $user = $request->user();
-        $accounts = Account::all();
+        $account = Account::find(5);
+        $interests = collect();
 
-        DB::transaction(function () use ($accounts) {
-            foreach($accounts as $account){
-                if ($account->interest) { // ensure interest exists for this account
-                    $interest = $account->interest->calculateSimpleInterest();
-                    $account->increment('balance', $interest);
+        if($account) {
+
+            $interests = $account->interests;
+            DB::transaction(function () use ($account) {
+                foreach ($account->interests as $interest) {
+                    $simpleInterest = $interest->calculateSimpleInterest();
+                    $account->increment('balance', $simpleInterest);
                 }
-            }
-        });
+            });
+        }
 
-        return view("admin.interest.create",['user'=> $user]);
+        return view("admin.interest.create",[
+            'user'=> $user,
+            'interests' => $interests
+        ]);
     }
 
     /**
@@ -51,7 +57,7 @@ class InterestController extends Controller
      */
     public function show(Interest $interest)
     {
-        //
+
     }
 
     /**
