@@ -5,6 +5,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\InterestController;
+use App\Http\Controllers\CurrencyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('account', AccountController::class);
     Route::resource('transaction', TransactionController::class);
     Route::resource('interest', InterestController::class);
+    Route::resource('currency', CurrencyController::class);
 });
 
 require __DIR__.'/auth.php';

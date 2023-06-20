@@ -24,7 +24,7 @@ class InterestController extends Controller
     {
         //
         $user = $request->user();
-        $account = Account::find(5);
+        $account = Account::find($user->id);
         $interests = collect();
 
         if($account) {

@@ -30,36 +30,25 @@
                             <table id="empoloyees-tbl1" class="table">
                                 <thead>
                                     <tr>
-                                        <th>Account Owner</th>
-                                        <th>Interet Rate</th>
-                                        <th>Interet Period</th>
-                                        <th>Calculation Date</th>
-                                        <th>Interet Amount</th>
-                                        <th>Status</th>
+                                        <th>Currency Code</th>
+                                        <th>Exchange Rate</th>
+                                        <th>Updated Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    @foreach($currencies as $currency)
                                     <tr>
                                         <td>
-                                            <span></span>
+                                            <span>{{ $currency->code }}</span>
                                         </td>
                                         <td>
-                                            <span></span>
+                                            <span>{{ $currency->rate }}</span>
                                         </td>
                                         <td>
-                                            <span></span>
-                                        </td>
-                                        <td>
-                                            <span></span>
-                                        </td>
-                                        <td>
-                                            <span></span>
-                                        </td>
-                                        <td>
-                                            <span></span>
+                                            <span>{{ $currency->updated_at }}</span>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                                 
                             </table>
