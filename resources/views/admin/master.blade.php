@@ -14,22 +14,14 @@
 	<meta name="format-detection" content="telephone=no">
 	
 	<!-- PAGE TITLE HERE -->
-	<title>Admin Dash</title>
-	<!-- FAVICONS ICON -->
-	<link rel="shortcut icon" type="image/png" href="images/favicon.png">
+	<title>Global Dashboard</title>
 	
 	<link href="{{ asset('backend/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('backend/assets/vendor/swiper/css/swiper-bundle.min.css') }}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.css" rel="stylesheet">
 	<link href="{{ asset('backend/assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('backend/assets/vendor/jvmap/jquery-jvectormap.css') }}" rel="stylesheet">
 	<link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
-	<link href="{{ asset('backend/assets/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
 
-	
-	<!-- tagify-css -->
-	<link href="{{ asset('backend/assets/vendor/tagify/dist/tagify.css')}}" rel="stylesheet">
 
     <!-- wizard -->
     @yield('css')
@@ -157,10 +149,6 @@
 	
 	<!-- Dashboard 1  -->
 	<script src="{{ asset('backend/assets/js/dashboard/dashboard-1.js')}}"></script>
-	<script src="{{ asset('backend/assets/vendor/draggable/draggable.js')}}"></script>
-
-	<!-- tagify -->
-	<script src="{{ asset('backend/assets/vendor/tagify/dist/tagify.js')}}"></script>
 
     <!-- Datatable -->
 	<script src="{{ asset('backend/assets/vendor/datatables/js/jquery.dataTables.min.js')}}"></script>

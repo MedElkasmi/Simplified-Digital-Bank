@@ -27,7 +27,7 @@ class TransactionController extends Controller
         //
         $data = [
             'user' => $request->user(),
-            'transactions' => Transaction::all(),
+            'transactions' => Transaction::with(['fromAccount', 'toAccount'])->get(),
         ];
 
         return view("admin.transaction.create",$data);
